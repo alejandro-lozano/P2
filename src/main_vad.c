@@ -27,6 +27,8 @@ int main(int argc, char *argv[]) {
 
   char	*input_wav, *output_vad, *output_wav;
 
+  float alfa0;
+
   DocoptArgs args = docopt(argc, argv, /* help */ 1, /* version */ "2.0");
 
   verbose    = args.verbose ? DEBUG_VAD : 0;
@@ -35,6 +37,8 @@ int main(int argc, char *argv[]) {
   output_wav = args.output_wav;
   alfa0      = atof(args.alfa0);
   //alfa0 es un Real, devuelve cadena de texto, llamar función que convierta cad. txt. a Real
+
+  alfa0 = atof(args.alfa0);
 
   if (input_wav == 0 || output_vad == 0) {
     fprintf(stderr, "%s\n", args.usage_pattern);
