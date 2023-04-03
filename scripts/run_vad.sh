@@ -1,10 +1,6 @@
 #!/bin/bash
 
-<<<<<<< HEAD
-if [ $# != 1 ]; then
-=======
 if [ $# !=1 ]; then
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
     echo "USAGE: $0 alfa0"
     exit -1
 fi

@@ -1,7 +1,6 @@
-project('Práctica 2 de PAC - Detección de actividad vocal','c')
+project('Práctica 2 PAV - Detección de actividad vocal', 'C')
 
 exe = 'vad'
-src =['src/main_vad.c','src/vad.c','src/pav_analysis.c']
-lib=['-lm','-lsndfile']
-
-executable(exe,sources:src, link_args:lib)
+src = ['src/main_vad.c','src/vad.c', 'src/pav_analysis.c']
+lib = ['-lm', '-lsndfile']
+executable(exe, sources: src, link_args: lib)

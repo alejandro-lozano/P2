@@ -1,10 +1,11 @@
 #include <math.h>
 #include "pav_analysis.h"
 
+
 float compute_power(const float *x, unsigned int N) {
     float pot = 1e-12;
     for(unsigned int n=0; n<N; n++){
-     pot += x[n]*x[n];   
+     pot += x[n]*x[n];  
     }
     return 10*log10(pot/N);
 }
@@ -12,16 +13,17 @@ float compute_power(const float *x, unsigned int N) {
 float compute_am(const float *x, unsigned int N) {
     float res=0;
     for(int i = 0 ;i < N;i++)
-    	res += fabs(x[i]);
-        
+        res += fabs(x[i]);
+       
     return res/N;
 }
+
 
 float compute_zcr(const float *x, unsigned int N, float fm) {
    float res=0;
    for(int i =1; i < N;i++){
-   	if((x[i]*x[i-1]<0))
-   	    res++;
+    if((x[i]*x[i-1]<0))
+        res++;
    }
    return res*fm/(2*(N-1));
    
