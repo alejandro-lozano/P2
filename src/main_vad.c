@@ -27,7 +27,6 @@ int main(int argc, char *argv[]) {
 
   char	*input_wav, *output_vad, *output_wav;
 
-  float alfa0;
 
   DocoptArgs args = docopt(argc, argv, /* help */ 1, /* version */ "2.0");
 

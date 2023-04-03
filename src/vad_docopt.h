@@ -37,12 +37,8 @@ const char help_message[] =
 "   -i FILE, --input-wav=FILE   WAVE file for voice activity detection\n"
 "   -o FILE, --output-vad=FILE  Label file with the result of VAD\n"
 "   -w FILE, --output-wav=FILE  WAVE file with silences cleared\n"
-<<<<<<< HEAD
 "   -0 FLOAT, --alfa0=FLOAT     Margen sobre P0 para determinar umbral de V/S\n"
 "                               [default: 5]\n"
-=======
-"   -0 FLOAT, --alfa0=FLOAT     Margen sobre P0 para determinar llindar de V/S [default: 2]\n"
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
 "   -v, --verbose  Show debug information\n"
 "   -h, --help     Show this screen\n"
 "   --version      Show the version of the project\n"
@@ -309,11 +305,7 @@ int elems_to_args(Elements *elements, DocoptArgs *args, bool help,
 
 DocoptArgs docopt(int argc, char *argv[], bool help, const char *version) {
     DocoptArgs args = {
-<<<<<<< HEAD
         0, 0, 0, (char*) "5", NULL, NULL, NULL,
-=======
-        0, 0, 0, (char*) "2", NULL, NULL, NULL,
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
         usage_pattern, help_message
     };
     Tokens ts;

@@ -1,11 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-<<<<<<< HEAD
 #include  "pav_analysis.h"
-=======
-#include "pav_analysis.h"
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
 #include "vad.h"
 
 const float FRAME_TIME = 10.0F; /* in ms. */
@@ -59,13 +55,7 @@ VAD_DATA * vad_open(float rate, float alfa0) {
   vad_data->state = ST_INIT;
   vad_data->sampling_rate = rate;
   vad_data->frame_length = rate * FRAME_TIME * 1e-3;
-<<<<<<< HEAD
   vad_data->alfa0 = alfa0;
-=======
-
-  vad_data->alfa0=alfa0;
-
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
   return vad_data;
 }
 
@@ -101,28 +91,16 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
   switch (vad_data->state) {
   case ST_INIT:
     vad_data->state = ST_SILENCE;
-<<<<<<< HEAD
     vad_data-> P0=f.p;
     break;
 
   case ST_SILENCE:
     if (f.p > vad_data -> P0 + vad_data->alfa0)
-=======
-    vad_data->P0=f.p;
-    break;
-
-  case ST_SILENCE:
-    if (f.p > vad_data->P0+vad_data->alfa0)
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
       vad_data->state = ST_VOICE;
     break;
 
   case ST_VOICE:
-<<<<<<< HEAD
     if (f.p < vad_data -> P0 + vad_data->alfa0)
-=======
-    if (f.p < vad_data->P0+vad_data->alfa0)
->>>>>>> 82cfc6826bdbcf15d7fee4c2bef143326fd9660c
       vad_data->state = ST_SILENCE;
     break;
 
