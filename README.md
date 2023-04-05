@@ -138,6 +138,22 @@ Ejercicios
 
 <img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
 
+    Nuestro etiquetado manual es :
+	
+	| start | end | value |
+	| --- | --- | --- |
+	| 0.0000000 | 0.6425000 | S |
+	| 0.6425000 | 2.7950000 | V |
+	| 2.7950000 | 3.3925000 | S |
+	| 3.3925000 | 3.8090315 | V |
+	| 3.8090315 | 4.2097452 | S |
+	| 4.2097452 | 4.9841582 | V |
+	| 4.9841582 | 5.4163887 | S |
+	| 5.4163887 | 5.9611793 | V |
+	| 5.4163887 | 6.7130803 | S |
+	| 6.7130803 | 7.6090582 | V |
+	| 7.6090582 | 8.4329976 | S |
+	
 <img width="161" alt="image" src="https://user-images.githubusercontent.com/125287859/230007106-9d4fb28a-6578-4e1a-9a7f-e8001226b23d.png">
 
 
