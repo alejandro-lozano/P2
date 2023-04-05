@@ -140,7 +140,7 @@ Como se indica en el enunciado hemos usado Wavesurfer para identificar y categor
 
 <img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
 
-    Nuestro etiquetado manual es :
+Con el comando ‘less’ o ‘cat’ podemos observar cuánto dura en segundos cada segmento etiquetado en WaveSurfer. Nuestro etiquetado manual es :
 	
 	| start | end | value |
 	| --- | --- | --- |
