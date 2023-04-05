@@ -13,7 +13,7 @@ const float FRAME_TIME = 10.0F; /* in ms. */
  */
 
 const char *state_str[] = {
-  "UNDEF", "S", "V", "INIT"
+  "UNDEF", "S", "V", "INIT", "MAYBE_VOICE", "MAYBE_SILENCE"
 };
 
 const char *state2str(VAD_STATE st) {
@@ -43,6 +43,9 @@ Features compute_features(const float *x, int N) {
    */
   Features feat;
   feat.p = compute_power(x,N);
+  feat.zcr = compute_zcr(x, N, 16000);
+  feat.am = compute_am(x, N);
+
   return feat;
 }
 
@@ -50,14 +53,18 @@ Features compute_features(const float *x, int N) {
  * TODO: Init the values of vad_data
  */
 
-VAD_DATA * vad_open(float rate, float alfa0) {
+VAD_DATA * vad_open(float rate, float alfa0, float alfa1) {
   VAD_DATA *vad_data = malloc(sizeof(VAD_DATA));
   vad_data->state = ST_INIT;
   vad_data->sampling_rate = rate;
   vad_data->frame_length = rate * FRAME_TIME * 1e-3;
 
-  vad_data->alfa0=alfa0;
-
+  vad_data->alfa0 = alfa0;
+  vad_data->alfa1 = alfa1;
+  vad_data->llindar0 = 0;
+  vad_data->llindar1 = 0;
+  vad_data->contador = 0;
+  
   return vad_data;
 }
 
@@ -90,28 +97,70 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
   Features f = compute_features(x, vad_data->frame_length); 
   vad_data->last_feature = f.p; /* save feature, in case you want to show */
 
+
+  float tiempo_MAYBE = FRAME_TIME*vad_data->contador*1e-3; //tiempo que usaremos para ver cuanto
+                                                            //hemos estado en un estado MAYBE
+
   switch (vad_data->state) {
   case ST_INIT:
+  // inicializamos llindars 1 y 2 para su uso posterior y cambiamos el estado a silencio, de acuerdo con las instrucciones
+    vad_data->llindar0 = f.p + vad_data->alfa0; 
+    vad_data->llindar1 = vad_data->llindar0 + vad_data->alfa1;
     vad_data->state = ST_SILENCE;
-    vad_data->P0=f.p;
     break;
 
   case ST_SILENCE:
-    if (f.p > vad_data->P0+vad_data->alfa0)
-      vad_data->state = ST_VOICE;
+    if (f.p > vad_data->llindar0)
+      vad_data->state = ST_MAYBE_VOICE;// Nos movemos a MAYBE_VOICE si estamos por encima del umbral
     break;
 
   case ST_VOICE:
-    if (f.p < vad_data->P0+vad_data->alfa0)
-      vad_data->state = ST_SILENCE;
+    if (f.p < vad_data->llindar1)
+      vad_data->state = ST_MAYBE_SILENCE;//Nos movemos a MAYBE_SILENCE si estamos por debajo del umbral
     break;
+
+  case ST_MAYBE_VOICE:
+    if(f.p > vad_data->llindar0){
+      if(tiempo_MAYBE > 0.09||(f.p > vad_data->alfa1 && tiempo_MAYBE > 0.07) ){
+        vad_data->state = ST_VOICE;
+        vad_data->contador = 0; //Como salimos de maybe actulizamos el contador
+      }
+      else{
+        vad_data->contador ++; //si seguimos entonces añadimos uno al contador de tramas
+      }
+    }
+    else{
+      vad_data->state = ST_SILENCE;
+      vad_data->contador = 0; //Reinciciamos contador ya que salimos del estado maybe
+    }
+    
+  break;
+
+  case ST_MAYBE_SILENCE:
+    if(f.p < vad_data->llindar1){
+      if(tiempo_MAYBE > 0.3 || (tiempo_MAYBE > 0.2 && f.p < vad_data->llindar0)){
+        vad_data->state = ST_SILENCE;
+        vad_data->contador = 0;
+      
+      }
+      else{
+        vad_data->contador ++;
+      }
+    }
+    else{
+      vad_data->state = ST_VOICE;
+      vad_data->contador = 0;
+    }
+    
+  break;
 
   case ST_UNDEF:
     break;
   }
 
   if (vad_data->state == ST_SILENCE ||
-      vad_data->state == ST_VOICE)
+      vad_data->state == ST_VOICE || vad_data->state == ST_MAYBE_SILENCE ||
+      vad_data->state == ST_MAYBE_VOICE)
     return vad_data->state;
   else
     return ST_UNDEF;

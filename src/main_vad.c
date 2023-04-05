@@ -17,16 +17,16 @@ int main(int argc, char *argv[]) {
   int n_read = 0, i;
 
   VAD_DATA *vad_data;
-  VAD_STATE state, last_state;
+  VAD_STATE state, last_state, original_state; //original_state es el último estado de voz o siencio que se ha estado
+                                              //Se usa para hacer comparaciones
 
   float *buffer, *buffer_zeros;
   int frame_size;         /* in samples */
   float frame_duration;   /* in seconds */
-  unsigned int t, last_t; /* in frames */
-  float alfa0;
+  unsigned int t, last_t, start_sv_t; /* in frames */
+                          //start_sv_t es el tiempo en el que empieza el silencio o la voz
 
   char	*input_wav, *output_vad, *output_wav;
-
 
   DocoptArgs args = docopt(argc, argv, /* help */ 1, /* version */ "2.0");
 
@@ -34,10 +34,10 @@ int main(int argc, char *argv[]) {
   input_wav  = args.input_wav;
   output_vad = args.output_vad;
   output_wav = args.output_wav;
-  alfa0      = atof(args.alfa0);
-  //alfa0 es un Real, devuelve cadena de texto, llamar función que convierta cad. txt. a Real
 
-  alfa0 = atof(args.alfa0);
+  //alfa0 y alfa1 es un Real, devuelve cadena de texto, llamar función que convierta cad. txt. a Real
+  float alfa0 = 5.1;
+  float alfa1 = 3;
 
   if (input_wav == 0 || output_vad == 0) {
     fprintf(stderr, "%s\n", args.usage_pattern);
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  vad_data = vad_open(sf_info.samplerate, alfa0);
+  vad_data = vad_open(sf_info.samplerate, alfa0, alfa1);
   /* Allocate memory for buffers */
   frame_size   = vad_frame_size(vad_data);
   buffer       = (float *) malloc(frame_size * sizeof(float));
@@ -78,8 +78,9 @@ int main(int argc, char *argv[]) {
 
   frame_duration = (float) frame_size/ (float) sf_info.samplerate;
   last_state = ST_UNDEF;
+  original_state = ST_SILENCE; 
 
-  for (t = last_t = 0; ; t++) { /* For each frame ... */
+  for (t = last_t = start_sv_t= 0 ; ; t++) { /* For each frame ... */
     /* End loop when file has finished (or there is an error) */
     if  ((n_read = sf_read_float(sndfile_in, buffer, frame_size)) != frame_size) break;
 
@@ -89,25 +90,56 @@ int main(int argc, char *argv[]) {
 
     state = vad(vad_data, buffer);
     if (verbose & DEBUG_VAD) vad_show_state(vad_data, stdout);
-
     /* TODO: print only SILENCE and VOICE labels */
-    /* As it is, it prints UNDEF segments but is should be merge to the proper value */
-    if (state != last_state) {
-      if (t != last_t)
-        fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration, state2str(last_state));
+    
+    if(state != last_state){ 
+      if(t !=last_t){
+        
+        if((original_state==ST_VOICE && state==ST_SILENCE && last_state==ST_MAYBE_SILENCE) || (original_state==ST_SILENCE && state==ST_VOICE && last_state==ST_MAYBE_VOICE)){
+        //Vemos si hay cambio de Silencio a Voz o Voz a Silencio
+
+          fprintf(vadfile, "%.5f\t%.5f\t%s\n", start_sv_t * frame_duration, (last_t-1) * frame_duration, state2str(original_state));
+
+          start_sv_t = last_t-1;
+          original_state = state;
+        }
+      }
+
+      if(last_state == ST_UNDEF){
+        last_state = state;
+      }
+
       last_state = state;
       last_t = t;
-    }
 
+    }
+    
     if (sndfile_out != 0) {
       /* TODO: go back and write zeros in silence segments */
     }
+
   }
 
   state = vad_close(vad_data);
   /* TODO: what do you want to print, for last frames? */
-  if (t != last_t)
-    fprintf(vadfile, "%.5f\t%.5f\t%s\n", last_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(state));
+  if (t != last_t){
+    if(state==ST_VOICE || state==ST_SILENCE){
+      
+      fprintf(vadfile, "%.5f\t%.5f\t%s\n", start_sv_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(state));
+      
+    }
+    else{
+      if(original_state == ST_SILENCE){
+        state = ST_SILENCE;
+      }
+      else{
+        state = ST_VOICE;
+      }
+      fprintf(vadfile, "%.5f\t%.5f\t%s\n", start_sv_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(state));
+
+    }
+  }
+    
 
   /* clean up: free memory, close open files */
   free(buffer);
