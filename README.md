@@ -136,39 +136,41 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
-	Como se indica en el enunciado hemos usado Wavesurfer para identificar y categorizar los tramos de audio donde se detecta ausencia de sonidos (s) y aquellos donde se detecta actividad vocal (v). Sin embargo, solo se han clasifiacado como tramos de silencio aquellos que poseen una duración suficientemente larga. Lo vemos a continuación:
+	>Como se indica en el enunciado hemos usado Wavesurfer para identificar y categorizar los tramos de audio donde se detecta 
+	>ausencia de sonidos (s) y aquellos donde se detecta actividad vocal (v). Sin embargo, solo se han clasifiacado como tramos 
+	>de silencio aquellos que poseen una duración suficientemente larga. Lo vemos a continuación:
 
-	<img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
+	><img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
 
-	Con el comando ‘less’ o ‘cat’ podemos observar cuánto dura en segundos cada segmento etiquetado en WaveSurfer:
+	>Con el comando ‘less’ o ‘cat’ podemos observar cuánto dura en segundos cada segmento etiquetado en WaveSurfer:
 
-	<img width="161" alt="image" src="https://user-images.githubusercontent.com/125287859/230007106-9d4fb28a-6578-4e1a-9a7f-e8001226b23d.png">
+	><img width="161" alt="image" src="https://user-images.githubusercontent.com/125287859/230007106-9d4fb28a-6578-4e1a-9a7f-e8001226b23d.png">
 
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
-
+	>
 	>Al examinar el gráfico de potencia, es posible que se identifique un umbral para diferenciar el sonido del silencio. 
 	>Por ejemplo, se podría considerar que los >segmentos con una potencia igual o superior a 25dB corresponden a sonido, 
 	>mientras que el resto serían silencio. Aunque este enfoque puede funcionar para la grabación >actual, es posible que 
 	>no sea aplicable a otras grabaciones de la base de datos debido a las variaciones en el nivel de potencia, el ruido de 
 	>fondo, entre otros factores.
-
+	>
 	* Duración mínima razonable de los segmentos de voz y silencio.
-
+	>
 	>La duración mínima de los segmentos más pequeños de voz y silencio es de 0.4 segundos. En algunos casos, se produce el 
 	>fenómeno de fraseo en la voz, en el que dos o más palabras cortas se unen sin pausa intermedia, lo que resulta en segmentos 
 	>de voz de mayor duración.
-
+	>
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
-
+	>
 	>Al observar nuevamente el gráfico y tener en cuenta la frase de voz que representa la señal, "Alejandro Lozano y Lucas Costafreda.
 	>Hola, muy buenas. ¿Qué tal?Yo todo muy bien", es posible notar que en cada tramo de sonido es factible distinguir los sonidos sonoros
 	>de los sordos. Esto se debe a que los sonido sonoros se caracterizan por tener menos cruces por cero (zcr) y una mayor cantidad de 
 	>energía. Por otro lado, los sonidos sordos tienen más cruces por cero y muy poca energía.
-
+	>
 ### Desarrollo del detector de actividad vocal
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal en
