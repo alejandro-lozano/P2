@@ -136,6 +136,11 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
+<img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
+
+<img width="161" alt="image" src="https://user-images.githubusercontent.com/125287859/230007106-9d4fb28a-6578-4e1a-9a7f-e8001226b23d.png">
+
+
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
