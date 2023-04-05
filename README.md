@@ -155,7 +155,9 @@ Con el comando ‘less’ o ‘cat’ podemos observar cuánto dura en segundos 
 	| 5.4163887 | 6.7130803 | S |
 	| 6.7130803 | 7.6090582 | V |
 	| 7.6090582 | 8.4329976 | S |
-	
+
+Con el comando ‘less’ o ‘cat’ podemos observar cuánto dura en segundos cada segmento etiquetado en WaveSurfer:
+
 <img width="161" alt="image" src="https://user-images.githubusercontent.com/125287859/230007106-9d4fb28a-6578-4e1a-9a7f-e8001226b23d.png">
 
 
