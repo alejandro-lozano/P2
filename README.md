@@ -136,6 +136,8 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
+Como se indica en el enunciado hemos usado Wavesurfer para identificar y categorizar los tramos de audio donde se detecta ausencia de sonidos (s) y aquellos donde se detecta actividad vocal (v). Sin embargo, solo se han clasifiacado como tramos de silencio aquellos que poseen una duración suficientemente larga. Lo vemos a continuación:
+
 <img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
 
     Nuestro etiquetado manual es :
