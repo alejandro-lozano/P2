@@ -174,7 +174,7 @@ La duración mínima de los segmentos más pequeños de voz y silencio es de 0.4
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
-
+Al observar nuevamente el gráfico y tener en cuenta la frase de voz que representa la señal, "Alejandro Lozano y Lucas Costafreda. Hola, muy buenas. ¿Qué tal? Yo todo muy bien", es posible notar que en cada tramo de sonido es factible distinguir los sonidos sonoros de los sordos. Esto se debe a que los sonidos sonoros se caracterizan por tener menos cruces por cero (zcr) y una mayor cantidad de energía. Por otro lado, los sonidos sordos tienen más cruces por cero y muy poca energía.
 ### Desarrollo del detector de actividad vocal
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal en
