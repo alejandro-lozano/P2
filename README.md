@@ -153,8 +153,8 @@ Ejercicios
 	  estar seguros de que un segmento de señal se corresponde con voz.
 	>
 	>Al examinar el gráfico de potencia, es posible que se identifique un umbral para diferenciar el sonido del silencio. 
-	>Por ejemplo, se podría considerar que los >segmentos con una potencia igual o superior a 25dB corresponden a sonido, 
-	>mientras que el resto serían silencio. Aunque este enfoque puede funcionar para la grabación >actual, es posible que 
+	>Por ejemplo, se podría considerar que los segmentos con una potencia igual o superior a 25dB corresponden a sonido, 
+	>mientras que el resto serían silencio. Aunque este enfoque puede funcionar para la grabación actual, es posible que 
 	>no sea aplicable a otras grabaciones de la base de datos debido a las variaciones en el nivel de potencia, el ruido de 
 	>fondo, entre otros factores.
 	>
