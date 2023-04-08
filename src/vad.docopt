@@ -9,8 +9,8 @@ Options:
    -i FILE, --input-wav=FILE   WAVE file for voice activity detection
    -o FILE, --output-vad=FILE  Label file with the result of VAD
    -w FILE, --output-wav=FILE  WAVE file with silences cleared
-   -0 FLOAT, --alfa0=FLOAT     Suma al Umbral 0 [default: 3]
-   -1 FLOAT, --alfa1=FLOAT     Suma al Umbral 1 [default: 5.1]
+   -0 FLOAT, --alfa0=FLOAT     Suma al Umbral 0 [default: 5.1]
+   -1 FLOAT, --alfa1=FLOAT     Suma al Umbral 1 [default: 3]
    -v, --verbose  Show debug information
    -h, --help     Show this screen
    --version      Show the version of the project

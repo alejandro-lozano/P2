@@ -105,7 +105,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
   case ST_INIT:
   // inicializamos llindars 1 y 2 para su uso posterior y cambiamos el estado a silencio, de acuerdo con las instrucciones
     vad_data->llindar0 = f.p + vad_data->alfa0; 
-    vad_data->llindar1 = vad_data->llindar0 + vad_data->alfa1;
+    vad_data->llindar1 = vad_data->llindar0 + vad_data->alfa1; //hacemos que el umbral1 sea más grande que el umbral0
     vad_data->state = ST_SILENCE;
     break;
 
@@ -121,7 +121,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
 
   case ST_MAYBE_VOICE:
     if(f.p > vad_data->llindar0){
-      if(tiempo_MAYBE > 0.09||(f.p > vad_data->alfa1 && tiempo_MAYBE > 0.07) ){
+      if(tiempo_MAYBE > 0.06 && f.p > vad_data->llindar1+5.2){
         vad_data->state = ST_VOICE;
         vad_data->contador = 0; //Como salimos de maybe actulizamos el contador
       }
@@ -138,7 +138,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
 
   case ST_MAYBE_SILENCE:
     if(f.p < vad_data->llindar1){
-      if(tiempo_MAYBE > 0.3 || (tiempo_MAYBE > 0.2 && f.p < vad_data->llindar0)){
+      if(tiempo_MAYBE > 0.2 && f.p < vad_data->llindar0){
         vad_data->state = ST_SILENCE;
         vad_data->contador = 0;
       

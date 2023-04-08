@@ -36,8 +36,8 @@ int main(int argc, char *argv[]) {
   output_wav = args.output_wav;
 
   //alfa0 y alfa1 es un Real, devuelve cadena de texto, llamar función que convierta cad. txt. a Real
-  float alfa0 = 5.1;
-  float alfa1 = 3;
+  float alfa0 = 5.28;
+  float alfa1 = 2.78;
 
   if (input_wav == 0 || output_vad == 0) {
     fprintf(stderr, "%s\n", args.usage_pattern);
