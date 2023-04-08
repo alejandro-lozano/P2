@@ -11,6 +11,7 @@ Options:
    -w FILE, --output-wav=FILE  WAVE file with silences cleared
    -0 FLOAT, --alfa0=FLOAT     Suma al Umbral 0 [default: 5.1]
    -1 FLOAT, --alfa1=FLOAT     Suma al Umbral 1 [default: 3]
+   -2 FLOAT, --alfa2=FLOAT     Suma al umbral 2 [default 5.2]
    -v, --verbose  Show debug information
    -h, --help     Show this screen
    --version      Show the version of the project

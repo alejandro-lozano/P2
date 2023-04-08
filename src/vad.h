@@ -19,8 +19,10 @@ typedef struct {
   float last_feature; /* for debuggin purposes */
   float llindar0;
   float llindar1;
+  float llindar2;
   float alfa0;
   float alfa1;
+  float alfa2;
   float contador;
 
 } VAD_DATA;
@@ -29,7 +31,7 @@ typedef struct {
    It should return allocated and initialized values of vad_data
 
    sampling_rate: ... the sampling rate */
-VAD_DATA *vad_open(float sampling_rate, float alfa0, float alfa1);
+VAD_DATA *vad_open(float sampling_rate, float alfa0, float alfa1, float alfa2);
 
 /* vad works frame by frame.
    This function returns the frame size so that the program knows how

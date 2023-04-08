@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
   //alfa0 y alfa1 es un Real, devuelve cadena de texto, llamar función que convierta cad. txt. a Real
   float alfa0 = 5.28;
   float alfa1 = 2.78;
+  float alfa2 = 5.2;
 
   if (input_wav == 0 || output_vad == 0) {
     fprintf(stderr, "%s\n", args.usage_pattern);
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  vad_data = vad_open(sf_info.samplerate, alfa0, alfa1);
+  vad_data = vad_open(sf_info.samplerate, alfa0, alfa1, alfa2);
   /* Allocate memory for buffers */
   frame_size   = vad_frame_size(vad_data);
   buffer       = (float *) malloc(frame_size * sizeof(float));

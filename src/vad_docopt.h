@@ -18,6 +18,7 @@ typedef struct {
     /* options with arguments */
     char *alfa0;
     char *alfa1;
+    char *alfa2;
     char *input_wav;
     char *output_vad;
     char *output_wav;
