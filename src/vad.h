@@ -23,6 +23,7 @@ typedef struct {
   float alfa0;
   float alfa1;
   float alfa2;
+  float zcr;
   float contador;
 
 } VAD_DATA;
