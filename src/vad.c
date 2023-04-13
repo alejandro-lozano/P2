@@ -121,7 +121,6 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
     if (f.p < vad_data->llindar1 && vad_data->zcr + vad_data->alfa2 > f.zcr){
       vad_data->state = ST_MAYBE_SILENCE;//Nos movemos a MAYBE_SILENCE si estamos por debajo del umbral
     }
-    
     break;
 
   case ST_MAYBE_VOICE:
@@ -138,7 +137,6 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
       vad_data->state = ST_SILENCE;
       vad_data->contador = 0; //Reinciciamos contador ya que salimos del estado maybe
     }
-    
   break;
 
   case ST_MAYBE_SILENCE:
@@ -150,6 +148,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
         vad_data->contador = 0;
         
       }
+      
       else{
         vad_data->contador ++;
       }
