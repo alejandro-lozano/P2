@@ -183,7 +183,8 @@ Ejercicios
 >![image](https://user-images.githubusercontent.com/127206937/231867379-345150c2-681f-4148-be77-7b77a33866ba.png)
 
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
->En WaveSurfer, podemos observar que el etiquetado automático identifica incorrectamente algunos fragmentos breves de voz como segmentos de silencio que fueron etiquetados manualmente. No obstante, el etiquetado automático es muy preciso en la detección del comienzo y final de los segmentos de voz, coincidiendo con el etiquetado manual.
+>En WaveSurfer, podemos observar que el etiquetado automático identifica incorrectamente algunos fragmentos breves de silencio como segmentos de voz. No obstante, el etiquetado automático es muy preciso en la detección del comienzo y final de los segmentos de voz, ya que no identifica (casi) segmentos de voz como segmentos de silencio.
+>Creemos que resulta más dañino etiquetar tramos de voz como silencio en comparación con etiquetar tramos de silencio como voz, ya que esto último preserva la información.
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
