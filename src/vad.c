@@ -114,12 +114,12 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
 
   case ST_SILENCE:
     if (f.p > vad_data->llindar0 || f.zcr > vad_data->zcr - vad_data->alfa2)
-      vad_data->state = ST_MAYBE_VOICE;// Nos movemos a MAYBE_VOICE si estamos por encima del umbral
+      vad_data->state = ST_MAYBE_VOICE;// Nos movemos a MAYBE_VOICE si estamos por encima del umbral o los cruces por cero son altos
     break;
 
   case ST_VOICE:
     if (f.p < vad_data->llindar1 && vad_data->zcr + vad_data->alfa2 > f.zcr){
-      vad_data->state = ST_MAYBE_SILENCE;//Nos movemos a MAYBE_SILENCE si estamos por debajo del umbral
+      vad_data->state = ST_MAYBE_SILENCE;//Nos movemos a MAYBE_SILENCE si estamos por debajo del umbral o los cruces por cero son bajos
     }
     break;
 
@@ -142,20 +142,20 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
   case ST_MAYBE_SILENCE:
     
     if(f.p < vad_data->llindar1){
-      if(tiempo_MAYBE > 0.2 && f.p < vad_data->llindar0){
+      if(tiempo_MAYBE > 0.16 && f.p < vad_data->llindar0){
         
         vad_data->state = ST_SILENCE;
-        vad_data->contador = 0;
+        vad_data->contador = 0; //Como salimos de maybe actulizamos el contador
         
       }
       
       else{
-        vad_data->contador ++;
+        vad_data->contador ++; //si seguimos entonces añadimos uno al contador de tramas
       }
     }
     else{
       vad_data->state = ST_VOICE;
-      vad_data->contador = 0;
+      vad_data->contador = 0; //Reinciciamos contador ya que salimos del estado maybe
     }
     
   break;
