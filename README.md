@@ -184,6 +184,7 @@ Ejercicios
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
 >Arriba vemos el etiquetado manual y abajo el etiquetado automático
+>
 >![image](https://user-images.githubusercontent.com/127206937/231867028-a7542924-919e-4923-be53-1c58bd4f391b.png)
 >![image](https://user-images.githubusercontent.com/127206937/231867379-345150c2-681f-4148-be77-7b77a33866ba.png)
 
