@@ -195,9 +195,9 @@ Ejercicios
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
 >
->![image](https://user-images.githubusercontent.com/127206937/232237753-90f1cbae-788b-46d3-86f2-7bd961312974.png)
+>![image](https://user-images.githubusercontent.com/127206937/232255210-bec1a95e-e1d2-417c-9c91-e75918cc075a.png)
 >
->En los resultados vemos que la precisión en voz y silencio es bastante alta en los dos casos, la de voz con 90.7% y la de silencio con 96.15%. Sin embargo, el recall en silencio es alrededor de un 13% menor que en voz. Esto se puede observar en las discrepancias entre el etiquetado manual y la detección automática comentadas anteriormente, ya que la detección automática parece identificar más segmentos de silencio como voz, pero no tantos segmentos de voz como silencio. Finalmente, conseguimos un puntaje F-score total de 94.926%.
+>En los resultados vemos que la precisión en voz y silencio es bastante alta en los dos casos, la de voz con 91.48% y la de silencio con 95.93%. Sin embargo, el recall en silencio es alrededor de un 12% menor que en voz. Esto se puede observar en las discrepancias entre el etiquetado manual y la detección automática comentadas anteriormente, ya que la detección automática parece identificar más segmentos de silencio como voz, pero no tantos segmentos de voz como silencio. Finalmente, conseguimos un puntaje F-score total de 95.039%.
 
 
 
