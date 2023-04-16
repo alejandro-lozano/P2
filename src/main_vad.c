@@ -87,6 +87,7 @@ int main(int argc, char *argv[]) {
 
     if (sndfile_out != 0) {
       /* TODO: copy all the samples into sndfile_out */
+      sf_write_float(sndfile_out, buffer, frame_size); ////////////
     }
 
     state = vad(vad_data, buffer);
@@ -100,6 +101,13 @@ int main(int argc, char *argv[]) {
         //Vemos si hay cambio de Silencio a Voz o Voz a Silencio
 
           fprintf(vadfile, "%.5f\t%.5f\t%s\n", start_sv_t * frame_duration, (last_t-1) * frame_duration, state2str(original_state));
+          
+          if (sndfile_out != 0 && original_state == ST_SILENCE) { ////////////
+            /* TODO: go back and write zeros in silence segments */
+            sf_seek(sndfile_out, start_sv_t *frame_size, SEEK_SET);
+           
+            sf_write_float(sndfile_out, buffer_zeros, 161*frame_size);
+          }
 
           start_sv_t = last_t-1;
           original_state = state;
@@ -115,10 +123,7 @@ int main(int argc, char *argv[]) {
 
     }
     
-    if (sndfile_out != 0) {
-      /* TODO: go back and write zeros in silence segments */
-    }
-
+    
   }
 
   state = vad_close(vad_data);
@@ -128,10 +133,24 @@ int main(int argc, char *argv[]) {
       
       fprintf(vadfile, "%.5f\t%.5f\t%s\n", start_sv_t * frame_duration, t * frame_duration + n_read / (float) sf_info.samplerate, state2str(state));
       
+      if (sndfile_out != 0 && original_state == ST_SILENCE) { ////////////
+            /* TODO: go back and write zeros in silence segments */
+            sf_seek(sndfile_out, start_sv_t *frame_size, SEEK_SET);
+            
+            sf_write_float(sndfile_out, buffer_zeros, 161*frame_size);
+          }
+    
     }
     else{
       if(original_state == ST_SILENCE){
         state = ST_SILENCE;
+
+        if(sndfile_out !=0){
+          sf_seek(sndfile_out, start_sv_t *frame_size, SEEK_SET);
+          
+          sf_write_float(sndfile_out, buffer_zeros, 161*frame_size);
+        }
+
       }
       else{
         state = ST_VOICE;
@@ -140,6 +159,7 @@ int main(int argc, char *argv[]) {
 
     }
   }
+  
     
 
   /* clean up: free memory, close open files */
