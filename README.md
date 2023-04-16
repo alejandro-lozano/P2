@@ -208,6 +208,15 @@ Ejercicios
 - Si ha desarrollado el algoritmo para la cancelación de los segmentos de silencio, inserte una gráfica en
   la que se vea con claridad la señal antes y después de la cancelación (puede que `wavesurfer` no sea la
   mejor opción para esto, ya que no es capaz de visualizar varias señales al mismo tiempo).
+>
+>A continuación vemos la señal de audio antes de y después de cancelar el ruido:
+>
+>![image](https://user-images.githubusercontent.com/127206937/232338614-2cfab1c5-4199-4247-962a-eb6445e7f87a.png)
+>
+>Nota: En la última trama no conseguimos cancelar el ruido como vemos en la comparativa.
+
+
+
 
 #### Gestión de las opciones del programa usando `docopt_c`
 
