@@ -140,7 +140,7 @@ Ejercicios
 	>ausencia de sonidos (s) y aquellos donde se detecta actividad vocal (v). Sin embargo, solo se han clasifiacado como tramos 
 	>de silencio aquellos que poseen una duración suficientemente larga. Lo vemos a continuación:
 
-	><img width="956" alt="image" src="https://user-images.githubusercontent.com/125287859/230006972-1a48babc-505d-413c-a78c-3c1f19f7666c.png">
+	<img width="942" alt="image" src="https://user-images.githubusercontent.com/125287859/232344804-8fad9fcd-4ac8-4542-b840-1b2a9d0f9f10.png">
 
 	>Con el comando ‘less’ o ‘cat’ podemos observar cuánto dura en segundos cada segmento etiquetado en WaveSurfer:
 
