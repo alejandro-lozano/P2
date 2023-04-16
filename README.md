@@ -223,6 +223,16 @@ Ejercicios
 
 - Si lo desea, puede realizar también algún comentario acerca de la realización de la práctica que
   considere de interés de cara a su evaluación.
+>Simplemente queremos comentar que para el cambio de estados a MAYBE_VOICE o a MAYBE_SILENCE además de utilizar la potencia media de la señal también
+>hemos utilizado los cruces por cero.
+>Como vemos en la imagen adjunta Para la transición del estado "SILENCE" a "MAYBE_VOICEE", el criterio es que el número de cruces por cero de la 
+>señal de audio debe ser mayor que (vad_data->zcr - vad_data->alfa2). Esto indica que hay un número relativamente alto de cruces por cero en 
+>la señal de audio, lo que puede ser indicativo de la presencia de voz.
+>Por otro lado, para la transición del estado "VOICE" a "MAYBE_SILENCE", el criterio es que el número de cruces por cero de la señal de audio 
+>debe ser menor que (vad_data->zcr + vad_data->alfa2). Esto indica que el número de cruces por cero en la señal de audio es relativamente bajo,
+>lo que puede ser indicativo de la presencia de silencio o ruido de fondo.
+>
+>![image](https://user-images.githubusercontent.com/127206937/232330163-ea579c41-5fd7-4c9f-8b51-feeccba84887.png)
 
 
 ### Antes de entregar la práctica
